@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    	<title>
+	Fetch Rewards Coding Assessment - Machine Learning Engineer
+	</title>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+	</script>
+</head>
+
+<script>
+function myFunction() {
+var text1= $('#text1').val();
+var text2= $('#text2').val();
+  $.ajax({
+              url: "/join",
+              type: "POST",
+              data: {text1:text1,
+              text2:text2}
+          }).done(function(response) {
+            var html= "<br><br> <p> <b> Pixel Coordinates: </b><p>";
+            response = response.result;
+                 $.each(response,function(key,val){
+                 console.log(val);
+                    html+="<p>"+val+"<p>"
+                });
+                html +="<br>";
+                $(".show-data").append(html);
+            });
+};
+</script>
+
+<body>
+<p>
+	<center> 
+	<b> Given the dimensions of your image and the corners of your rectangle, we'll compute your corresponding pixel coordinates! </b>
+	</center>
+<br><br>
+
+<b> Dimensions: </b> <i> (please enter as a tuple, e.g. (3, 5) for 3 rows and 5 columns) </i> 
+<br>
+<input type="text" id="text1" name="text1">
+<br><br>
+
+<b> Corners: </b> <i> (please enter as a list consisting of four tuples defining a rectangle, e.g. [(1, 1), (3, 3), (3, 1), (1, 3)]) </i>
+<br>
+<input type="text" id="text2" name="text2">
+<br><br>
+
+<button id="clicked" onclick="myFunction()">
+Get Pixels!
+</button>
+</p>
+
+<div class="show-data" >
+</div>
+</body>
+</html>
